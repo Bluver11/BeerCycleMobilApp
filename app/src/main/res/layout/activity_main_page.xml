@@ -20,11 +20,14 @@
             android:elevation="4dp"
             android:background="@color/navYellow">
 
-            <ImageView
+            <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:icon="@drawable/baseline_local_grocery_store_24"/>
+                android:id="@+id/imagebuttonbasket"
+                android:src="@drawable/baseline_local_grocery_store_24"
+                android:background="@color/navYellow"
+                />
 
 
         </androidx.appcompat.widget.Toolbar>

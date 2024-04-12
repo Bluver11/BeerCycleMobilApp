@@ -15,6 +15,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -32,6 +33,8 @@ public class MainPageActivity extends AppCompatActivity implements NavigationVie
     Button button;
     ImageView imageView;
 
+    ImageButton imageButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,11 +49,22 @@ public class MainPageActivity extends AppCompatActivity implements NavigationVie
         frameLayout = findViewById(R.id.fragmentcontainer);
         button = findViewById(R.id.buttonfoglalas);
         imageView= findViewById(R.id.beercycle);
+        imageButton = findViewById(R.id.imagebuttonbasket);
         drawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open,R.string.close);
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainPageActivity.this, "Basket clicked", Toast.LENGTH_SHORT).show();
+                frameLayout.setVisibility(View.VISIBLE);
+                button.setVisibility(View.GONE);
+                imageView.setVisibility(View.GONE);
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentcontainer, new BasketFragment()).commit();
+            }
+        });
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -79,6 +93,7 @@ public class MainPageActivity extends AppCompatActivity implements NavigationVie
         if(menuItem.getItemId()==R.id.aboutus){
             Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
         }
+
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
 
