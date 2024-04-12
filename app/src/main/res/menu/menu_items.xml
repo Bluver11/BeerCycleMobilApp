@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:title="Oldalaink">
+    <menu>
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/home_view"
+            android:icon="@drawable/baseline_home_24"
+            android:title="Főoldal"/>
+        <item android:id="@+id/gallery"
+            android:icon="@drawable/baseline_image_24"
+            android:title="Galéria"/>
+        <item android:id="@+id/menu"
+            android:icon="@drawable/baseline_menu_book_24"
+            android:title="Étlap"/>
+    </group>
+    </menu>
+    </item>
+
+    <item android:title="Profil">
+        <menu>
+            <group>
+                <item android:id="@+id/about"
+                    android:icon="@drawable/baseline_info_24"
+                    android:title="Profil"/>
+                <item android:id="@+id/rate"
+                    android:icon="@drawable/baseline_emoji_emotions_24"
+                    android:title="Értékelés"/>
+            </group>
+        </menu>
+    </item>
+    <item android:title="Rólunk">
+    <menu>
+    <item android:title="Rólunk"
+        android:id="@+id/aboutus"
+        android:icon="@drawable/baseline_info_24">
+
+
+    </item>
+    </menu>
+    </item>
+
+
+
+
+</menu>
