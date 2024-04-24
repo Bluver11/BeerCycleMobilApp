@@ -102,6 +102,9 @@ public class MainPageActivity extends AppCompatActivity implements NavigationVie
         if(menuItem.getItemId()==R.id.aboutus){
             Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
         }
+        if(menuItem.getItemId()==R.id.contact){
+            Toast.makeText(this,"",Toast.LENGTH_SHORT).show();
+        }
 
         if(menuItem.getItemId()==R.id.logout){
             Toast.makeText(this,"Sikeres kijelenkezés",Toast.LENGTH_SHORT).show();
