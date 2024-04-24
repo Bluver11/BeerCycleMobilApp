@@ -36,7 +36,7 @@ public class MainPageActivity extends AppCompatActivity implements NavigationVie
     Button button;
     ImageView imageView;
 
-    ImageButton imageButton;
+    ImageButton imageButtonBasket;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,13 +52,13 @@ public class MainPageActivity extends AppCompatActivity implements NavigationVie
         frameLayout = findViewById(R.id.fragmentcontainer);
         button = findViewById(R.id.buttonfoglalas);
         imageView= findViewById(R.id.beercycle);
-        imageButton = findViewById(R.id.imagebuttonbasket);
+        imageButtonBasket = findViewById(R.id.imagebuttonbasket);
         drawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open,R.string.close);
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
-        imageButton.setOnClickListener(new View.OnClickListener() {
+        imageButtonBasket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainPageActivity.this, "Basket clicked", Toast.LENGTH_SHORT).show();
