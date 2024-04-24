@@ -3,6 +3,9 @@ package com.example.beercycletest;
 public class Response {
 
     private int responseCode;
+    /**
+     * A válasz tartalma
+     */
     private String responseMessage;
 
     public Response(int responseCode, String responseMessage) {

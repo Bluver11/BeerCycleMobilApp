@@ -27,7 +27,11 @@
                 <item android:id="@+id/rate"
                     android:icon="@drawable/baseline_emoji_emotions_24"
                     android:title="Értékelés"/>
+                <item android:id="@+id/logout"
+                    android:icon="@drawable/baseline_emoji_emotions_24"
+                    android:title="Kilépés"/>
             </group>
+
         </menu>
     </item>
     <item android:title="Rólunk">

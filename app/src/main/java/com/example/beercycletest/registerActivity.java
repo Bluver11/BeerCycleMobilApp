@@ -88,16 +88,16 @@ public class registerActivity extends AppCompatActivity {
             try {
                 switch (requestType) {
                     case "GET":
-                        response = RequestHandler.get(requestUrl);
+                       // response = RequestHandler.get(requestUrl);
                         break;
                     case "POST":
-                        response = RequestHandler.post(requestUrl, requestParams);
+                        response = RequestHandler.post(requestUrl, requestParams,null);
                         break;
                     case "PUT":
-                        response = RequestHandler.put(requestUrl, requestParams);
+                      //  response = RequestHandler.put(requestUrl, requestParams);
                         break;
                     case "DELETE":
-                        response = RequestHandler.delete(requestUrl + "/" + requestParams);
+                       // response = RequestHandler.delete(requestUrl + "/" + requestParams);
                         break;
                 }
             } catch (IOException e) {

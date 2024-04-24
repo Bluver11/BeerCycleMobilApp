@@ -1,5 +1,9 @@
 package com.example.beercycletest;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -18,13 +22,17 @@ public class RequestHandler {
     }
 
     //backend csatlakozásért felelős methódus
-    private static HttpURLConnection setupConnection(String url) throws IOException {
-        URL urlObject = new URL(url);
-        HttpURLConnection connection = (HttpURLConnection) urlObject.openConnection();
-        connection.setRequestProperty("Accept", "application/json");
-        connection.setConnectTimeout(1000);
-        connection.setReadTimeout(1000);
-        return connection;
+    private static HttpURLConnection setupConnection(String url, String token) throws IOException {
+        URL urlObj = new URL(url);
+        HttpURLConnection conn = (HttpURLConnection) urlObj.openConnection();
+        conn.setRequestProperty("Accept", "application/json");
+        conn.setConnectTimeout(10000);
+        conn.setReadTimeout(10000);
+        Log.d("Token", "setupConnection: " + token);
+        if (token != null) {
+            conn.setRequestProperty("Authorization", "Bearer " + token);
+        }
+        return conn;
     }
 
     //response elérése
@@ -62,30 +70,30 @@ public class RequestHandler {
     }
 
     //GET METHOD
-    public static Response get(String url) throws IOException {
-        HttpURLConnection connection = setupConnection(url);
+    public static Response get(String url,String token) throws IOException {
+        HttpURLConnection connection = setupConnection(url,token);
         return getResponse(connection);
     }
 
     //POST METHOD
-    public static Response post(String url, String data) throws IOException {
-        HttpURLConnection connection = setupConnection(url);
+    public static Response post(String url, String data,String token) throws IOException {
+        HttpURLConnection connection = setupConnection(url,token);
         connection.setRequestMethod("POST");
         addRequestBody(connection, data);
         return getResponse(connection);
     }
 
     //PUT METHOD
-    public static Response put(String url, String data) throws IOException {
-        HttpURLConnection connection = setupConnection(url);
-        connection.setRequestMethod("PUT");
+    public static Response patch(String url, String data,String token) throws IOException {
+        HttpURLConnection connection = setupConnection(url,token);
+        connection.setRequestMethod("PATCH");
         addRequestBody(connection, data);
         return getResponse(connection);
     }
 
     //DELETE METHOD
-    public static Response delete(String url) throws IOException {
-        HttpURLConnection connection = setupConnection(url);
+    public static Response delete(String url,String token) throws IOException {
+        HttpURLConnection connection = setupConnection(url,token);
         connection.setRequestMethod("DELETE");
         return getResponse(connection);
     }

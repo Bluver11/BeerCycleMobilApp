@@ -8,6 +8,9 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -82,7 +85,13 @@ public class MainPageActivity extends AppCompatActivity implements NavigationVie
             imageView.setVisibility(View.GONE);
         }
         if(menuItem.getItemId()==R.id.menu){
-            Toast.makeText(this, "Home Selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Menu Selected", Toast.LENGTH_SHORT).show();
+            frameLayout.setVisibility(View.VISIBLE);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentcontainer,new MenuFragment()).commit();
+            button.setVisibility(View.GONE);
+            imageView.setVisibility(View.GONE);
+
+
         }
         if(menuItem.getItemId()==R.id.about){
             Toast.makeText(this, "Home Selected", Toast.LENGTH_SHORT).show();
@@ -92,6 +101,15 @@ public class MainPageActivity extends AppCompatActivity implements NavigationVie
         }
         if(menuItem.getItemId()==R.id.aboutus){
             Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
+        }
+
+        if(menuItem.getItemId()==R.id.logout){
+            Toast.makeText(this,"Sikeres kijelenkezés",Toast.LENGTH_SHORT).show();
+            SharedPreferences sharedPreferences = getSharedPreferences("Data", Context.MODE_PRIVATE);
+            sharedPreferences.edit().clear().commit();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);

@@ -3,19 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BasketFragment">
+    tools:context=".ProfilFragment">
 
-
+    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="A kosarad jelenleg üres!"
-        android:id="@+id/basketempty"/>
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/list_item_menu"
-        android:id="@+id/basketlist"
-        />
+        android:text="@string/hello_blank_fragment" />
 
 </FrameLayout>
