@@ -25,17 +25,14 @@
         <menu>
             <group>
                 <item
-                    android:id="@+id/about"
+                    android:id="@+id/profil"
                     android:icon="@drawable/baseline_info_24"
                     android:title="Profil" />
                 <item
                     android:id="@+id/rate"
                     android:icon="@drawable/baseline_emoji_emotions_24"
                     android:title="Értékelés" />
-                <item
-                    android:id="@+id/logout"
-                    android:icon="@drawable/baseline_exit_to_app_24"
-                    android:title="Kilépés" />
+
             </group>
 
         </menu>
@@ -56,6 +53,10 @@
         </menu>
 
     </item>
+    <item
+        android:id="@+id/logout"
+        android:icon="@drawable/baseline_exit_to_app_24"
+        android:title="Kilépés" />
 
 
 </menu>

@@ -39,6 +39,7 @@ public class BasketFragment extends Fragment {
     private TextView empty;
     private ListView listViewBasket;
     private List<Basket> menuList = new ArrayList<>();
+    private List<MenuBeer> menuBeers = new ArrayList<>();
 
 
     private String url = "http://10.0.2.2:3000/basket";
@@ -63,6 +64,9 @@ public class BasketFragment extends Fragment {
         public BasketAdapter(Context context, List<MenuBeer> menuBeers) {
             super(getActivity(), R.layout.list_item_menu, menuBeers);
         }
+        public BasketAdapter() {
+            super(getActivity(), R.layout.list_item_menu, menuBeers);
+        }
 
         @NonNull
         @Override
@@ -78,9 +82,6 @@ public class BasketFragment extends Fragment {
             TextView textViewPrice = view.findViewById(R.id.menuPrice);
             //actualComment létrehozása a commentsList listából
             MenuBeer actualbasket = getItem(position);
-
-
-            //imageViewAvatar.setImageBitmap(getBitmapFromURL(actualComment.getAvatar()));
             textViewName.setText(actualbasket.getMenuName());
             textViewType.setText(actualbasket.getMenuType());
             textViewPrice.setText(String.valueOf(actualbasket.getMenuPrice()));
@@ -98,13 +99,17 @@ public class BasketFragment extends Fragment {
                             .setMessage("Tényleg kiszeretnéd törölni az adott elemet a kosaradból??")
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-
+                                
                                 public void onClick(DialogInterface dialog, int whichButton) {
 
 
-                                    Basket basket = menuList.get(position);
+
+                                    Log.d("menuFo.menu", ""+menuList.size());
+                                    Log.d("menuFo.cart", ""+menuBeers.size());
+                                    Basket basket = menuList.get(0);
                                     int id = actualbasket.getId();
                                     MenuId menu = new MenuId(id);
+                                    Log.d("valami2:",""+menu);
                                     String basketid = String.valueOf(basket.getId());
                                     String url1 = basicurl + "/" + basketid + "/removeitems";
                                     RequestTask requestTask = new RequestTask(url1, "PATCH", gson.toJson(menu));
@@ -112,7 +117,7 @@ public class BasketFragment extends Fragment {
 
                                 }
                             })
-                            .setNegativeButton(android.R.string.no, null).show();
+                            .setNegativeButton(android.R.string.no, null).create().show();
                 }
             });
 
@@ -189,14 +194,17 @@ public class BasketFragment extends Fragment {
 
                 Basket[] menuArray = converter.fromJson(
                         response.getResponseMessage(), Basket[].class);
-                List<MenuBeer> menuBeers = new ArrayList<>();
+                menuBeers.clear();
                 for (Basket basket : menuArray) {
                     menuBeers.addAll(basket.getMenu());
                 }
+
+
                 listViewBasket.setAdapter(new BasketAdapter(getActivity(), menuBeers));
                 //cars lista feltöltése a válasz elemeivel
                 menuList.clear();
                 menuList.addAll(Arrays.asList(menuArray));
+                Log.d("valami1:",""+menuBeers.size());
                 //adapter értesítése az adatváltozásról (újra kell rajzolni a listát)
 
 
@@ -208,9 +216,8 @@ public class BasketFragment extends Fragment {
                 }
             } else if (requestType.equals("PATCH")) {
                     Toast.makeText(getActivity(), "Siker", Toast.LENGTH_SHORT).show();
-                    menuList.clear();
-                    listViewBasket.invalidateViews();
-
+                    RequestTask task = new RequestTask(url,"GET");
+                    task.execute();
                 }
             }
         }

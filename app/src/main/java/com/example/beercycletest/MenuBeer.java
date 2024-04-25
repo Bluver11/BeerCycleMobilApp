@@ -48,4 +48,5 @@ public class MenuBeer {
     public void setMenuPrice(Integer menuPrice) {
         this.price = menuPrice;
     }
+
 }

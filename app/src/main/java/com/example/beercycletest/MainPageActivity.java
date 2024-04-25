@@ -33,10 +33,11 @@ public class MainPageActivity extends AppCompatActivity implements NavigationVie
     ActionBarDrawerToggle drawerToggle;
     Toolbar toolbar;
     FrameLayout frameLayout;
-    Button button;
+    Button buttonFoglalas;
     ImageView imageView;
 
     ImageButton imageButtonBasket;
+    Button buttonReservation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,7 @@ public class MainPageActivity extends AppCompatActivity implements NavigationVie
         navigationView = findViewById(R.id.nav_view);
         toolbar = findViewById(R.id.toolbar);
         frameLayout = findViewById(R.id.fragmentcontainer);
-        button = findViewById(R.id.buttonfoglalas);
+        buttonFoglalas = findViewById(R.id.buttonfoglalas);
         imageView= findViewById(R.id.beercycle);
         imageButtonBasket = findViewById(R.id.imagebuttonbasket);
         drawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open,R.string.close);
@@ -58,14 +59,25 @@ public class MainPageActivity extends AppCompatActivity implements NavigationVie
         drawerToggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
+
+        buttonFoglalas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainPageActivity.this,"Reservation clicked", Toast.LENGTH_SHORT).show();
+                //frameLayout.setVisibility(View.VISIBLE);
+                //getSupportFragmentManager().beginTransaction().replace(R.id.fragmentcontainer, )
+            }
+        });
+
         imageButtonBasket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(MainPageActivity.this, "Basket clicked", Toast.LENGTH_SHORT).show();
                 frameLayout.setVisibility(View.VISIBLE);
-                button.setVisibility(View.GONE);
-                imageView.setVisibility(View.GONE);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragmentcontainer, new BasketFragment()).commit();
+                buttonFoglalas.setVisibility(View.GONE);
+                imageView.setVisibility(View.GONE);
+
             }
         });
     }
@@ -74,36 +86,53 @@ public class MainPageActivity extends AppCompatActivity implements NavigationVie
         if(menuItem.getItemId()==R.id.home_view){
             Toast.makeText(this, "Home Selected", Toast.LENGTH_SHORT).show();
             frameLayout.setVisibility(View.GONE);
-            button.setVisibility(View.VISIBLE);
+            buttonFoglalas.setVisibility(View.VISIBLE);
             imageView.setVisibility(View.VISIBLE);
         }
         if(menuItem.getItemId()==R.id.gallery){
             Toast.makeText(this, "Gallery Selected", Toast.LENGTH_SHORT).show();
             frameLayout.setVisibility(View.VISIBLE);
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentcontainer,new GalleryFragment()).commit();
-            button.setVisibility(View.GONE);
+            buttonFoglalas.setVisibility(View.GONE);
             imageView.setVisibility(View.GONE);
         }
         if(menuItem.getItemId()==R.id.menu){
             Toast.makeText(this, "Menu Selected", Toast.LENGTH_SHORT).show();
             frameLayout.setVisibility(View.VISIBLE);
             getSupportFragmentManager().beginTransaction().replace(R.id.fragmentcontainer,new MenuFragment()).commit();
-            button.setVisibility(View.GONE);
+            buttonFoglalas.setVisibility(View.GONE);
             imageView.setVisibility(View.GONE);
 
 
         }
-        if(menuItem.getItemId()==R.id.about){
-            Toast.makeText(this, "Home Selected", Toast.LENGTH_SHORT).show();
+        if(menuItem.getItemId()==R.id.profil){
+           Toast.makeText(this,"Profil Selected",Toast.LENGTH_SHORT).show();
+           frameLayout.setVisibility(View.VISIBLE);
+           getSupportFragmentManager().beginTransaction().replace(R.id.fragmentcontainer,new ProfilFragment()).commit();
+           buttonFoglalas.setVisibility(View.GONE);
+           imageView.setVisibility(View.GONE);
         }
         if(menuItem.getItemId()==R.id.rate){
-            Toast.makeText(this, "Home Selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Rate Selected", Toast.LENGTH_SHORT).show();
+            frameLayout.setVisibility(View.VISIBLE);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentcontainer,new RatingFragment()).commit();
+            buttonFoglalas.setVisibility(View.GONE);
+            imageView.setVisibility(View.GONE);
+
         }
         if(menuItem.getItemId()==R.id.aboutus){
-            Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "AboutUs Selected", Toast.LENGTH_SHORT).show();
+            frameLayout.setVisibility(View.VISIBLE);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentcontainer,new AboutUsFragment()).commit();
+            buttonFoglalas.setVisibility(View.GONE);
+            imageView.setVisibility(View.GONE);
         }
         if(menuItem.getItemId()==R.id.contact){
-            Toast.makeText(this,"",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Contact Selected",Toast.LENGTH_SHORT).show();
+            frameLayout.setVisibility(View.VISIBLE);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentcontainer,new ContactFragment()).commit();
+            buttonFoglalas.setVisibility(View.GONE);
+            imageView.setVisibility(View.GONE);
         }
 
         if(menuItem.getItemId()==R.id.logout){

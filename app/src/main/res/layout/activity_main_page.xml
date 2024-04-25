@@ -20,6 +20,13 @@
             android:elevation="4dp"
             android:background="@color/navYellow">
 
+            <ImageView
+                android:layout_width="55dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/logo2"
+                />
+
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

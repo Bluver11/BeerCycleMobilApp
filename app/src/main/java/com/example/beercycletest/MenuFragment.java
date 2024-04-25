@@ -126,7 +126,7 @@ public class MenuFragment extends Fragment {
 
                                 }
                             })
-                            .setNegativeButton(android.R.string.no, null).show();
+                            .setNegativeButton(android.R.string.no, null).create().show();
                 }
             });
 
