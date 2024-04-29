@@ -104,7 +104,7 @@ public class MenuFragment extends Fragment {
             textViewType.setText(actualMenu.getMenuType());
             textViewPrice.setText(String.valueOf(actualMenu.getMenuPrice()));
             String menuName = actualMenu.getMenuName();
-            int imageResourceId = getResources().getIdentifier(menuName.toLowerCase().replace(" ","_").replace("(","").replace(")",""), "drawable", getActivity().getPackageName());
+            int imageResourceId = getResources().getIdentifier(menuName.toLowerCase().replace(" ","_").replace("(","").replace(")","").replace("é","e").replace("á","a"), "drawable", getActivity().getPackageName());
             imageViewMenu.setImageResource(imageResourceId);
             Gson gson = new Gson();
 
