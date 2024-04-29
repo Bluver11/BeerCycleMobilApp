@@ -94,6 +94,8 @@ public class MenuFragment extends Fragment {
             TextView textViewName = view.findViewById(R.id.menuName);
             TextView textViewType = view.findViewById(R.id.menuType);
             TextView textViewPrice = view.findViewById(R.id.menuPrice);
+            ImageView imageViewMenu = view.findViewById(R.id.imagetomenu);
+
             //actualComment létrehozása a commentsList listából
             MenuBeer actualMenu = menuList.get(position);
 
@@ -101,6 +103,9 @@ public class MenuFragment extends Fragment {
             textViewName.setText(actualMenu.getMenuName());
             textViewType.setText(actualMenu.getMenuType());
             textViewPrice.setText(String.valueOf(actualMenu.getMenuPrice()));
+            String menuName = actualMenu.getMenuName();
+            int imageResourceId = getResources().getIdentifier(menuName.toLowerCase().replace(" ","_").replace("(","").replace(")",""), "drawable", getActivity().getPackageName());
+            imageViewMenu.setImageResource(imageResourceId);
             Gson gson = new Gson();
 
             tobasket.setOnClickListener(new View.OnClickListener() {

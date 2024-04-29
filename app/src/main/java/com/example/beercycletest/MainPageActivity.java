@@ -65,7 +65,7 @@ public class MainPageActivity extends AppCompatActivity implements NavigationVie
             public void onClick(View v) {
                 Toast.makeText(MainPageActivity.this,"Reservation clicked", Toast.LENGTH_SHORT).show();
                 frameLayout.setVisibility(View.VISIBLE);
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentcontainer, )
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentcontainer, new ReservationFragment()).commit();
             }
         });
 

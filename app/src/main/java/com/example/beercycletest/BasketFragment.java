@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -80,11 +81,16 @@ public class BasketFragment extends Fragment {
             TextView textViewName = view.findViewById(R.id.menuName);
             TextView textViewType = view.findViewById(R.id.menuType);
             TextView textViewPrice = view.findViewById(R.id.menuPrice);
+            ImageView imageViewMenu = view.findViewById(R.id.imagetomenu);
             //actualComment létrehozása a commentsList listából
             MenuBeer actualbasket = getItem(position);
             textViewName.setText(actualbasket.getMenuName());
             textViewType.setText(actualbasket.getMenuType());
             textViewPrice.setText(String.valueOf(actualbasket.getMenuPrice()));
+
+            String menuName = actualbasket.getMenuName();
+            int imageResourceId = getResources().getIdentifier(menuName.toLowerCase().replace(" ","_").replace("(","").replace(")",""), "drawable", getActivity().getPackageName());
+            imageViewMenu.setImageResource(imageResourceId);
             int id = actualbasket.getId();
 
             outbasket.setImageResource(R.drawable.baseline_cancel_24);
@@ -209,7 +215,7 @@ public class BasketFragment extends Fragment {
 
 
                 listViewBasket.invalidateViews();
-                if (menuList.isEmpty()) {
+                if (menuBeers.isEmpty()) {
                     empty.setVisibility(View.VISIBLE);}
                 else{
                     empty.setVisibility(View.GONE);
