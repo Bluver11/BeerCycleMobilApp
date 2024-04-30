@@ -71,14 +71,14 @@ public class MenuFragment extends Fragment {
 
     public void init(View view) {
         listViewMenu = view.findViewById(R.id.listViewMenu);
-        listViewMenu.setAdapter(new CommentsAdapter());
+        listViewMenu.setAdapter(new MenuAdapter());
         //ArrayAdapter<MenuBeer> mAdapter = new ArrayAdapter<>(getActivity(),R.layout.list_item_menu,menuList);
 
     }
 
 
-    private class CommentsAdapter extends ArrayAdapter<MenuBeer> {
-        public CommentsAdapter() {
+    private class MenuAdapter extends ArrayAdapter<MenuBeer> {
+        public MenuAdapter() {
             super(getActivity(), R.layout.list_item_menu, menuList);
         }
 

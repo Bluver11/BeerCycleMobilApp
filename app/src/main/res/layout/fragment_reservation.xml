@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.beercycletest.LockableScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ReservationFragment">
+    tools:context=".ReservationFragment"
+    android:fillViewport="false"
+    android:scrollbars="none"
+    android:id="@+id/reservationscroll">
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/bicyclereservation">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,10 +31,69 @@
         android:spinnerMode="dropdown"
         android:layout_below="@+id/reservationText"
         />
-    <ImageView
-        android:id="@+id/imagebicycle"
+
+        <ImageView
+            android:id="@+id/imagebicycle"
+            android:layout_width="wrap_content"
+            android:layout_height="600dp"
+            android:src="@drawable/logo2" />
+
+        <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/logo2"/>
+        android:text="Tovább"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/scroll1"
+        android:layout_below="@id/imagebicycle"/>
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginBottom="5dp"
+        android:layout_above="@+id/reservationMenu"
+        />
 
-</RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="750dp"
+            android:id="@+id/reservationMenu"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ezek vannak a kosaradba helyezve. Ha még több elemet szeretnél elhelyezni megteheted a Étlap menü pontban."
+                android:textSize="20dp"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/test"/>
+            <ListView android:id="@+id/reservationListMenu"
+                android:layout_width="match_parent"
+                android:layout_height="600dp"
+                tools:listitem="@layout/list_item_menu"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vissza"
+                    android:layout_marginLeft="110dp"
+                    android:layout_gravity="center_horizontal"
+                    />
+                <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tovább"
+                android:layout_gravity="center_horizontal"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+        
+    </RelativeLayout>
+</com.example.beercycletest.LockableScrollView>
