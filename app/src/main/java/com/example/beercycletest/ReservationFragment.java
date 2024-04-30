@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CalendarView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -33,23 +34,36 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 
 public class ReservationFragment extends Fragment {
 
     private Spinner dropdown;
+    private Spinner reservationTimeSpinner;
     private ImageView bicycleimage;
     private LockableScrollView scrollView;
 
     private LinearLayout reservationMenu;
+    private CalendarView calendarView;
+    private Spinner timeSlotSpinner;
+    private Map<Integer, List<String>> timeSlotsByDay;
+
+    private TextView reservationText;
 
     private Button scroll1;
+    private Button scroll1back;
+    private Button scroll2;
     private ListView listViewBasket;
     private List<Basket> menuList = new ArrayList<>();
     private List<MenuBeer> menuBeers = new ArrayList<>();
     private String url = "http://10.0.2.2:3000/basket";
+    private LinearLayout calendarLinear;
+
 
 
     @Override
@@ -96,6 +110,56 @@ public class ReservationFragment extends Fragment {
                 requestTask.execute();
             }
         });
+        scroll1back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                scrollToContentBack(v);
+            }
+        });
+
+        scroll2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                scrollToContent2(v);
+            }
+        });
+        String[] times = new String[]{"One", "Three", "Five"};
+        ArrayAdapter<String> adapter1 = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, times);
+        reservationTimeSpinner.setAdapter(adapter1);
+
+
+        timeSlotsByDay = new HashMap<>();
+        timeSlotsByDay.put(Calendar.SUNDAY,new ArrayList<>(Arrays.asList("Closed")));
+        timeSlotsByDay.put(Calendar.MONDAY, new ArrayList<>(Arrays.asList("8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30",
+                "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30","19:00","20:00","20:30","21:00","21:30")));
+        timeSlotsByDay.put(Calendar.TUESDAY, new ArrayList<>(Arrays.asList("8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30",
+                "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00")));
+        timeSlotsByDay.put(Calendar.WEDNESDAY,new ArrayList<>(Arrays.asList("10:00", "10:30", "11:00", "11:30", "12:00", "12:30",
+                "13:00", "13:30", "14:00")));
+        timeSlotsByDay.put(Calendar.THURSDAY,new ArrayList<>(Arrays.asList("8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30",
+                "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00")));
+        timeSlotsByDay.put(Calendar.FRIDAY,new ArrayList<>(Arrays.asList("8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30",
+                "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00")));
+        timeSlotsByDay.put(Calendar.SATURDAY,new ArrayList<>(Arrays.asList("8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30",
+                "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30","19:00","20:00","20:30","21:00","21:30")));
+
+
+
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
+                int selectedDayofWeek = getDayOfWeek(year,month,dayOfMonth);
+                List<String> selectedTimeSlots = timeSlotsByDay.get(selectedDayofWeek);
+                ArrayAdapter<String> timeSlotAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item,selectedTimeSlots);
+                timeSlotAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                timeSlotSpinner.setAdapter(timeSlotAdapter);
+                Calendar selectedDate = Calendar.getInstance();
+                selectedDate.set(year, month, dayOfMonth);
+                if(selectedDate.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY){
+                    Toast.makeText(getContext(), "A vasárnapi nap zárva vagyunk emiatt azt nem válaszhatod!",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 
 
 
@@ -103,14 +167,28 @@ public class ReservationFragment extends Fragment {
         return view;
 
     }
+    private int getDayOfWeek(int year, int month, int dayOfMonth) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, dayOfMonth);
+        return calendar.get(Calendar.DAY_OF_WEEK);
+    }
     public void scrollToContent(View view) {
         int scrollToY = reservationMenu.getTop(); // A megfelelő hely Y koordinátája
         Log.d("valami1:",""+reservationMenu.getTop());
-        scrollView.smoothScrollTo(1, scrollToY);
+        scrollView.smoothScrollTo(0, scrollToY);
+    }
+    public void scrollToContentBack(View view) {
+        int scrollToY = reservationText.getTop(); // A megfelelő hely Y koordinátája
+        scrollView.smoothScrollTo(0, scrollToY);
+    }
+    public void scrollToContent2(View view) {
+        int scrollToY = calendarLinear.getTop(); // A megfelelő hely Y koordinátája
+        scrollView.smoothScrollTo(0, scrollToY);
     }
 
 
     public void init(View view){
+
         listViewBasket = view.findViewById(R.id.reservationListMenu);
         scrollView = view.findViewById(R.id.reservationscroll);
         scrollView.setScrollingEnabled(false);
@@ -118,6 +196,13 @@ public class ReservationFragment extends Fragment {
         scroll1 = view.findViewById(R.id.scroll1);
         dropdown = view.findViewById(R.id.dropdown);
         bicycleimage = view.findViewById(R.id.imagebicycle);
+        scroll1back = view.findViewById(R.id.scroll1back);
+        reservationText = view.findViewById(R.id.reservationText);
+        scroll2 = view.findViewById(R.id.scroll2);
+        calendarView = view.findViewById(R.id.calendar);
+        calendarLinear = view.findViewById(R.id.calendarLinear);
+        timeSlotSpinner = view.findViewById(R.id.timeSlotSpinner);
+        reservationTimeSpinner = view.findViewById(R.id.reservationTimeSpinner);
     }
     private class BasketAdapter extends ArrayAdapter<MenuBeer> {
         public BasketAdapter(Context context, List<MenuBeer> menuBeers) {
