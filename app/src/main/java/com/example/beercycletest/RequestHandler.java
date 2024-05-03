@@ -15,12 +15,23 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
-
+/**
+ * Egy RequestHandler osztály, amely a backend csatlakozásért felelős.
+ */
 public class RequestHandler {
-
+    /**
+     * Privát konstruktor, hogy ne lehessen példányosítani.
+     */
     private RequestHandler() {
     }
-
+    /**
+     * Beállítja a kapcsolatot a megadott URL-hez.
+     *
+     * @param url A csatlakozandó URL.
+     * @param token A hitelesítő token (opcionális).
+     * @return A beállított HttpURLConnection objektum.
+     * @throws IOException Ha hiba történik a csatlakozás során.
+     */
     //backend csatlakozásért felelős methódus
     private static HttpURLConnection setupConnection(String url, String token) throws IOException {
         URL urlObj = new URL(url);
@@ -69,13 +80,30 @@ public class RequestHandler {
         outputStream.close();
     }
 
-    //GET METHOD
+    /**
+     * Get response.
+     *
+     * @param url   the url
+     * @param token the token
+     * @return the response
+     * @throws IOException the io exception
+     */
+//GET METHOD
     public static Response get(String url,String token) throws IOException {
         HttpURLConnection connection = setupConnection(url,token);
         return getResponse(connection);
     }
 
-    //POST METHOD
+    /**
+     * Post response.
+     *
+     * @param url   the url
+     * @param data  the data
+     * @param token the token
+     * @return the response
+     * @throws IOException the io exception
+     */
+//POST METHOD
     public static Response post(String url, String data,String token) throws IOException {
         HttpURLConnection connection = setupConnection(url,token);
         connection.setRequestMethod("POST");
@@ -83,7 +111,16 @@ public class RequestHandler {
         return getResponse(connection);
     }
 
-    //PUT METHOD
+    /**
+     * Patch response.
+     *
+     * @param url   the url
+     * @param data  the data
+     * @param token the token
+     * @return the response
+     * @throws IOException the io exception
+     */
+//PUT METHOD
     public static Response patch(String url, String data,String token) throws IOException {
         HttpURLConnection connection = setupConnection(url,token);
         connection.setRequestMethod("PATCH");
@@ -91,7 +128,15 @@ public class RequestHandler {
         return getResponse(connection);
     }
 
-    //DELETE METHOD
+    /**
+     * Delete response.
+     *
+     * @param url   the url
+     * @param token the token
+     * @return the response
+     * @throws IOException the io exception
+     */
+//DELETE METHOD
     public static Response delete(String url,String token) throws IOException {
         HttpURLConnection connection = setupConnection(url,token);
         connection.setRequestMethod("DELETE");

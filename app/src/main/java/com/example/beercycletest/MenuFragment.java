@@ -40,6 +40,9 @@ import java.util.Arrays;
 import java.util.List;
 
 
+/**
+ * The type Menu fragment.
+ */
 public class MenuFragment extends Fragment {
 
     private ListView listViewMenu;
@@ -69,6 +72,11 @@ public class MenuFragment extends Fragment {
     }
 
 
+    /**
+     * Init.
+     *
+     * @param view the view
+     */
     public void init(View view) {
         listViewMenu = view.findViewById(R.id.listViewMenu);
         listViewMenu.setAdapter(new MenuAdapter());
@@ -78,6 +86,9 @@ public class MenuFragment extends Fragment {
 
 
     private class MenuAdapter extends ArrayAdapter<MenuBeer> {
+        /**
+         * Instantiates a new Menu adapter.
+         */
         public MenuAdapter() {
             super(getActivity(), R.layout.list_item_menu, menuList);
         }
@@ -141,12 +152,31 @@ public class MenuFragment extends Fragment {
 
 
     private class RequestTask extends AsyncTask<Void, Void, Response> {
+        /**
+         * The Request url.
+         */
         String requestUrl;
+        /**
+         * The Request type.
+         */
         String requestType;
+        /**
+         * The Request params.
+         */
         String requestParams;
 
+        /**
+         * The Request id.
+         */
         int requestId;
 
+        /**
+         * Instantiates a new Request task.
+         *
+         * @param requestUrl    the request url
+         * @param requestType   the request type
+         * @param requestParams the request params
+         */
         public RequestTask(String requestUrl, String requestType, String requestParams) {
             this.requestUrl = requestUrl;
             this.requestType = requestType;
@@ -154,6 +184,12 @@ public class MenuFragment extends Fragment {
         }
 
 
+        /**
+         * Instantiates a new Request task.
+         *
+         * @param requestUrl  the request url
+         * @param requestType the request type
+         */
         public RequestTask(String requestUrl, String requestType) {
             this.requestUrl = requestUrl;
             this.requestType = requestType;

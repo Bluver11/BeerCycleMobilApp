@@ -7,6 +7,7 @@ import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
 /**
  * A kosarat reprezentáló osztály menüelemek tárolására.
  */
@@ -21,11 +22,11 @@ public class Basket {
     /**
      * Új Basket objektumot hoz létre.
      *
-     * @param id A kosár egyedi azonosítója
-     * @param userId A kosárhoz kapcsolt felhasználó azonosítója
-     * @param deleted Megadja, hogy a kosár törölve van-e
+     * @param id        A kosár egyedi azonosítója
+     * @param userId    A kosárhoz kapcsolt felhasználó azonosítója
+     * @param deleted   Megadja, hogy a kosár törölve van-e
      * @param deletedAt A kosár törlésének dátuma és ideje (opcionális, lehet null)
-     * @param menu A kosárban található menüelemek listája
+     * @param menu      A kosárban található menüelemek listája
      */
     public Basket(int id, int userId, boolean deleted, LocalDateTime deletedAt, List<MenuBeer> menu) {
         this.id = id;
@@ -34,6 +35,7 @@ public class Basket {
         this.deletedAt = Optional.ofNullable(deletedAt);
         this.menu = menu;
     }
+
     /**
      * Visszaadja a kosár egyedi azonosítóját.
      *
@@ -96,6 +98,7 @@ public class Basket {
     public Optional<LocalDateTime> getDeletedAt() {
         return deletedAt;
     }
+
     /**
      * Beállítja a kosár törlésének dátumát és idejét (ha alkalmazható).
      *
@@ -104,6 +107,7 @@ public class Basket {
     public void setDeletedAt(Optional<LocalDateTime> deletedAt) {
         this.deletedAt = deletedAt;
     }
+
     /**
      * Visszaadja a kosárban található menüelemek listáját.
      *

@@ -48,6 +48,9 @@ import java.util.Map;
 import java.util.TimeZone;
 
 
+/**
+ * The type Reservation fragment.
+ */
 public class ReservationFragment extends Fragment {
 
     private Spinner dropdown;
@@ -67,6 +70,7 @@ public class ReservationFragment extends Fragment {
     private Button scroll2;
     private Button scroll3;
     private Button reservationbutton;
+    private Button backtomainpage;
     private ListView listViewBasket;
     private List<Basket> menuList = new ArrayList<>();
     private List<MenuBeer> menuBeers = new ArrayList<>();
@@ -81,6 +85,9 @@ public class ReservationFragment extends Fragment {
     private String selectedday;
     private String start_time;
     private int bicycle_id;
+    /**
+     * The Tobasket.
+     */
     ImageButton tobasket;
 
 
@@ -248,6 +255,13 @@ public class ReservationFragment extends Fragment {
         });
 
 
+        backtomainpage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MainPageActivity.class);
+                startActivity(intent);
+            }
+        });
 
         return view;
 
@@ -257,29 +271,63 @@ public class ReservationFragment extends Fragment {
         calendar.set(year, month, dayOfMonth);
         return calendar.get(Calendar.DAY_OF_WEEK);
     }
+
+    /**
+     * Scroll to content.
+     *
+     * @param view the view
+     */
     public void scrollToContent(View view) {
         int scrollToY = reservationMenu.getTop(); // A megfelelő hely Y koordinátája
         Log.d("valami1:",""+reservationMenu.getTop());
         scrollView.smoothScrollTo(0, scrollToY);
     }
+
+    /**
+     * Scroll to content back.
+     *
+     * @param view the view
+     */
     public void scrollToContentBack(View view) {
         int scrollToY = reservationText.getTop(); // A megfelelő hely Y koordinátája
         scrollView.smoothScrollTo(0, scrollToY);
     }
+
+    /**
+     * Scroll to content 2.
+     *
+     * @param view the view
+     */
     public void scrollToContent2(View view) {
         int scrollToY = calendarLinear.getTop(); // A megfelelő hely Y koordinátája
         scrollView.smoothScrollTo(0, scrollToY);
     }
 
+    /**
+     * Scroll to content 3.
+     *
+     * @param view the view
+     */
     public void scrollToContent3(View view) {
         int scrollToY = mapLinear.getTop(); // A megfelelő hely Y koordinátája
         scrollView.smoothScrollTo(0, scrollToY);
     }
+
+    /**
+     * Scroll to content 4.
+     *
+     * @param view the view
+     */
     public void scrollToContent4(View view) {
         int scrollToY = endlinear.getTop(); // A megfelelő hely Y koordinátája
         scrollView.smoothScrollTo(0, scrollToY);
     }
 
+    /**
+     * Init.
+     *
+     * @param view the view
+     */
     public void init(View view){
 
         listViewBasket = view.findViewById(R.id.reservationListMenu);
@@ -303,11 +351,22 @@ public class ReservationFragment extends Fragment {
         city = view.findViewById(R.id.city);
         postalcode = view.findViewById(R.id.postalcode);
         endlinear = view.findViewById(R.id.endpage);
+        backtomainpage = view.findViewById(R.id.backtomainpage);
     }
     private class BasketAdapter extends ArrayAdapter<MenuBeer> {
+        /**
+         * Instantiates a new Basket adapter.
+         *
+         * @param context   the context
+         * @param menuBeers the menu beers
+         */
         public BasketAdapter(Context context, List<MenuBeer> menuBeers) {
             super(getActivity(), R.layout.list_item_menu, menuBeers);
         }
+
+        /**
+         * Instantiates a new Basket adapter.
+         */
         public BasketAdapter() {
             super(getActivity(), R.layout.list_item_menu, menuBeers);
         }
@@ -345,10 +404,26 @@ public class ReservationFragment extends Fragment {
     }
 
     private class RequestTask extends AsyncTask<Void, Void, Response> {
+        /**
+         * The Request url.
+         */
         String requestUrl;
+        /**
+         * The Request type.
+         */
         String requestType;
+        /**
+         * The Request params.
+         */
         String requestParams;
 
+        /**
+         * Instantiates a new Request task.
+         *
+         * @param requestUrl    the request url
+         * @param requestType   the request type
+         * @param requestParams the request params
+         */
         public RequestTask(String requestUrl, String requestType, String requestParams) {
             this.requestUrl = requestUrl;
             this.requestType = requestType;
@@ -356,6 +431,12 @@ public class ReservationFragment extends Fragment {
         }
 
 
+        /**
+         * Instantiates a new Request task.
+         *
+         * @param requestUrl  the request url
+         * @param requestType the request type
+         */
         public RequestTask(String requestUrl, String requestType) {
             this.requestUrl = requestUrl;
             this.requestType = requestType;

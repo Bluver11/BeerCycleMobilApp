@@ -10,10 +10,18 @@ import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
 
+/**
+ * Az alkalmazás betöltőképernyőjét reprezentáló Activity.
+ */
 public class LoadingActivity extends AppCompatActivity {
 
     private static int SPLASH_TIME_OUT = 5000;
 
+    /**
+     * Az Activity létrehozásakor meghívódó metódus.
+     *
+     * @param savedInstanceState Az előző állapotot tartalmazó Bundle.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

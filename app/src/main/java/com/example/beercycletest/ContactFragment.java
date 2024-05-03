@@ -8,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+/**
+ * The type Contact fragment.
+ */
 public class ContactFragment extends Fragment {
 
     @Override

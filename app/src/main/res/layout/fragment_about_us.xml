@@ -1,14 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AboutUsFragment">
+    tools:context=".AboutUsFragment"
+    android:orientation="vertical"
+    android:background="@color/beige">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Az Alapítás és Célunk"
+        android:textSize="30dp"
+        android:layout_gravity="center_horizontal"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="A BeerCycle egy 2023-ban alapított vállalkozás, amely a sörbiciklizés élményét kínálja Budapesten. Célunk, hogy egyedi és felejthetetlen élményt nyújtsunk mindazoknak, akik szeretnének egy kicsit kilépni a megszokott keretek közül. A sörbiciklizés nem csak egy egyszerű tevékenység – ez egy közösségépítő, szórakoztató és aktív program, amely új kapcsolatokat teremt és emlékezetes pillanatokat szerez."
+        android:textSize="15dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="30dp"
+        android:text="Mi is az a Sörbiciklizés Budapesten?"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:text="A sörbiciklizés egy olyan élmény, ahol egy 15 fős, pedálokkal hajtott bárkocsin ülve fedezhetjük fel Budapestet. A BeerCycle a legnagyobb és legmodernebb sörbiciklit kínálja Budapesten, amely akár 17 fő befogadására is alkalmas. Egy hatalmas buli, éneklés és nevetés a barátaiddal, miközben ezen a hatalmas sörbiciklin tekerünk végig a városon."
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="30dp"
+        android:text=" Három Méretű Biciklink van"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:text="A BeerCycle három méretű biciklit kínál:
 
-</FrameLayout>
+Kis méret: 10 fő befogadására alkalmas.
+Közepes méret: 15 fő befogadására alkalmas.
+Nagy méret: Akár 17 fő is elfér rajta."
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Legyen szó munkahelyi rendezvényről, születésnapi buliról vagy legény- vagy leánybúcsúról, a BeerCycle garantáltan feldobja az eseményt! Gyere és tekerj velünk Budapesten! "
+        android:textSize="20dp"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/beercycle"/>
+
+</LinearLayout>

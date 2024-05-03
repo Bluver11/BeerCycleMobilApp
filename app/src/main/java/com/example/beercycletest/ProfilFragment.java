@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+/**
+ * The type Profil fragment.
+ */
 public class ProfilFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

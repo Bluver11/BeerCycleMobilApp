@@ -9,6 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+/**
+ * The type About us fragment.
+ */
 public class AboutUsFragment extends Fragment {
 
     @Override

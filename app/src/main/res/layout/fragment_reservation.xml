@@ -281,6 +281,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|center_horizontal"
                 android:text="Vissza a főoldalra"
+                android:id="@+id/backtomainpage"
                 android:layout_marginTop="250dp"/>
 
         </LinearLayout>

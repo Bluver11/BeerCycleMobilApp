@@ -26,17 +26,47 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.Objects;
 
+/**
+ * The type Main page activity.
+ */
 public class MainPageActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    /**
+     * The Drawer layout.
+     */
     DrawerLayout drawerLayout;
+    /**
+     * The Navigation view.
+     */
     NavigationView navigationView;
 
+    /**
+     * The Drawer toggle.
+     */
     ActionBarDrawerToggle drawerToggle;
+    /**
+     * The Toolbar.
+     */
     Toolbar toolbar;
+    /**
+     * The Frame layout.
+     */
     FrameLayout frameLayout;
+    /**
+     * The Button foglalas.
+     */
     Button buttonFoglalas;
+    /**
+     * The Image view.
+     */
     ImageView imageView;
 
+    /**
+     * The Image button basket.
+     */
     ImageButton imageButtonBasket;
+    /**
+     * The Button reservation.
+     */
     Button buttonReservation;
 
     @Override

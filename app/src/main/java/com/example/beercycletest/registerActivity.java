@@ -17,6 +17,9 @@ import com.google.gson.Gson;
 
 import java.io.IOException;
 
+/**
+ * The type Register activity.
+ */
 public class registerActivity extends AppCompatActivity {
 
     private EditText editTextUserName;
@@ -57,6 +60,9 @@ public class registerActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Init.
+     */
     public void init(){
 
         editTextUserName = findViewById(R.id.editTextUserName);
@@ -67,16 +73,38 @@ public class registerActivity extends AppCompatActivity {
         registerButton = findViewById(R.id.registerButton);
     }
     private class RequestTask extends AsyncTask<Void, Void, Response> {
+        /**
+         * The Request url.
+         */
         String requestUrl;
+        /**
+         * The Request type.
+         */
         String requestType;
+        /**
+         * The Request params.
+         */
         String requestParams;
 
+        /**
+         * Instantiates a new Request task.
+         *
+         * @param requestUrl    the request url
+         * @param requestType   the request type
+         * @param requestParams the request params
+         */
         public RequestTask(String requestUrl, String requestType, String requestParams) {
             this.requestUrl = requestUrl;
             this.requestType = requestType;
             this.requestParams = requestParams;
         }
 
+        /**
+         * Instantiates a new Request task.
+         *
+         * @param requestUrl  the request url
+         * @param requestType the request type
+         */
         public RequestTask(String requestUrl, String requestType) {
             this.requestUrl = requestUrl;
             this.requestType = requestType;

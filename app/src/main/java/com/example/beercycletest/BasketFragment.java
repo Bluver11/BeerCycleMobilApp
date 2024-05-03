@@ -35,6 +35,9 @@ import java.util.Arrays;
 import java.util.List;
 
 
+/**
+ * The type Basket fragment.
+ */
 public class BasketFragment extends Fragment {
 
     private TextView empty;
@@ -56,15 +59,30 @@ public class BasketFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Init.
+     *
+     * @param view the view
+     */
     public void init(View view) {
         listViewBasket = view.findViewById(R.id.basketlist);
         empty = view.findViewById(R.id.basketempty);
     }
 
     private class BasketAdapter extends ArrayAdapter<MenuBeer> {
+        /**
+         * Instantiates a new Basket adapter.
+         *
+         * @param context   the context
+         * @param menuBeers the menu beers
+         */
         public BasketAdapter(Context context, List<MenuBeer> menuBeers) {
             super(getActivity(), R.layout.list_item_menu, menuBeers);
         }
+
+        /**
+         * Instantiates a new Basket adapter.
+         */
         public BasketAdapter() {
             super(getActivity(), R.layout.list_item_menu, menuBeers);
         }
@@ -132,10 +150,26 @@ public class BasketFragment extends Fragment {
     }
 
     private class RequestTask extends AsyncTask<Void, Void, Response> {
+        /**
+         * The Request url.
+         */
         String requestUrl;
+        /**
+         * The Request type.
+         */
         String requestType;
+        /**
+         * The Request params.
+         */
         String requestParams;
 
+        /**
+         * Instantiates a new Request task.
+         *
+         * @param requestUrl    the request url
+         * @param requestType   the request type
+         * @param requestParams the request params
+         */
         public RequestTask(String requestUrl, String requestType, String requestParams) {
             this.requestUrl = requestUrl;
             this.requestType = requestType;
@@ -143,6 +177,12 @@ public class BasketFragment extends Fragment {
         }
 
 
+        /**
+         * Instantiates a new Request task.
+         *
+         * @param requestUrl  the request url
+         * @param requestType the request type
+         */
         public RequestTask(String requestUrl, String requestType) {
             this.requestUrl = requestUrl;
             this.requestType = requestType;
