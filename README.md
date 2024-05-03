@@ -16,7 +16,7 @@ A BeerCycle egy sörbicikli kölcsönzésére és italok rendelésére szolgál�
 ## Dokumentáció
 Részletesebb felhasználói dokumentációért tekintse meg a docs mappában található BeerCycle felhasználói dokumentáció.docx fájlt.
 ## Licensz
-MIT
+[MIT](https://choosealicense.com/licenses/mit/)
 ## Szerző 
-Szupkai Richárd
+[Szupkai Ricsi](https://github.com/Bluver11)
 
