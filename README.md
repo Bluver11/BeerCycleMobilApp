@@ -9,7 +9,7 @@ A BeerCycle egy sörbicikli kölcsönzésére és italok rendelésére szolgál�
 - **Vélemények, visszajelzések írása**: A felhasználók véleményeket írhatnak az oldalon található szolgáltatásokról.
 
 ## Telepítés
--Telepítse az Android Studio-t.
--Nyissa meg a projektet az Android Studio-ban.
--Futtassa az alkalmazást az emulátoron vagy egy fizikai Android eszközön.
+-**Telepítse az Android Studio-t.**
+-**Nyissa meg a projektet az Android Studio-ban.**
+-**Futtassa az alkalmazást az emulátoron vagy egy fizikai Android eszközön.**
 
