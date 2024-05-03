@@ -13,3 +13,10 @@ A BeerCycle egy sörbicikli kölcsönzésére és italok rendelésére szolgál�
 - **Nyissa meg a projektet az Android Studio-ban.**
 - **Futtassa az alkalmazást az emulátoron vagy egy fizikai Android eszközön.**
 
+## Dokumentáció
+Részletesebb felhasználói dokumentációért tekintse meg a docs mappában található BeerCycle felhasználói dokumentáció.docx fájlt.
+## Licensz
+MIT
+## Szerző 
+Szupkai Richárd
+
