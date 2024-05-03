@@ -112,6 +112,9 @@ public class MainPageActivity extends AppCompatActivity implements NavigationVie
            buttonFoglalas.setVisibility(View.GONE);
            imageView.setVisibility(View.GONE);
         }
+        if(menuItem.getItemId()==R.id.history){
+            Toast.makeText(this,"History Selected",Toast.LENGTH_SHORT).show();
+        }
         if(menuItem.getItemId()==R.id.rate){
             Toast.makeText(this, "Rate Selected", Toast.LENGTH_SHORT).show();
             frameLayout.setVisibility(View.VISIBLE);

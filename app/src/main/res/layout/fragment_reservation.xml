@@ -6,7 +6,8 @@
     tools:context=".ReservationFragment"
     android:fillViewport="false"
     android:scrollbars="none"
-    android:id="@+id/reservationscroll">
+    android:id="@+id/reservationscroll"
+    android:background="@color/beige">>
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -170,6 +171,7 @@
                     android:text="Tovább"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginLeft="10dp"
+                    android:id="@+id/scroll3"
                     />
 
             </LinearLayout>
@@ -177,13 +179,109 @@
 
         </LinearLayout>
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="750dp"
             android:orientation="vertical"
-            android:layout_below="@id/calendarLinear">
+            android:layout_below="@id/calendarLinear"
+            android:id="@+id/maplinear">
 
 
 
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Utolsó lépésként kérlek add meg a pontos címedet"
+                android:layout_gravity="center_vertical"
+                android:textSize="30dp"
+                android:layout_marginTop="200dp"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Város"
+                android:textSize="30dp"
+                android:id="@+id/city"
+                android:layout_gravity="center_vertical"
+                />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Irányítószám"
+                android:textSize="30dp"
+                android:id="@+id/postalcode"
+                android:layout_gravity="center_vertical"
+                />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Utca,házszám"
+                android:textSize="30dp"
+                android:id="@+id/actaulstreet"
+                android:layout_gravity="center_vertical"
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="200dp">
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vissza"
+                    android:layout_marginLeft="110dp"
+                    android:layout_gravity="center_horizontal"
+
+                    android:layout_marginRight="10dp"
+                    />
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Foglalaás"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="20dp"
+                    android:id="@+id/reservationbutton"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="780dp"
+            android:layout_below="@+id/maplinear"
+            android:id="@+id/endpage"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Köszönjük hogy a "
+                android:textSize="30dp"
+                android:layout_gravity="center_horizontal"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:src="@drawable/beercycle"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="választotta!"
+                android:layout_gravity="center_horizontal"
+                android:textSize="30dp"/>
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center_horizontal"
+                android:text="Vissza a főoldalra"
+                android:layout_marginTop="250dp"/>
 
         </LinearLayout>
         

@@ -29,6 +29,11 @@
                     android:icon="@drawable/baseline_info_24"
                     android:title="Profil" />
                 <item
+                    android:id="@+id/history"
+                    android:icon="@drawable/baseline_history_24"
+                    android:title="Előzmények"
+                    />
+                <item
                     android:id="@+id/rate"
                     android:icon="@drawable/baseline_emoji_emotions_24"
                     android:title="Értékelés" />

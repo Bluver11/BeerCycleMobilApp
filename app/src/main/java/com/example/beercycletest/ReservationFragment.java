@@ -1,5 +1,7 @@
 package com.example.beercycletest;
 
+import static com.google.gson.internal.$Gson$Types.arrayOf;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -12,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,11 +23,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,13 +35,17 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 
 
 public class ReservationFragment extends Fragment {
@@ -58,11 +65,23 @@ public class ReservationFragment extends Fragment {
     private Button scroll1;
     private Button scroll1back;
     private Button scroll2;
+    private Button scroll3;
+    private Button reservationbutton;
     private ListView listViewBasket;
     private List<Basket> menuList = new ArrayList<>();
     private List<MenuBeer> menuBeers = new ArrayList<>();
     private String url = "http://10.0.2.2:3000/basket";
+    private String reservationurl="http://10.0.2.2:3000/reservation";
     private LinearLayout calendarLinear;
+    private EditText actualstreet;
+    private EditText city;
+    private EditText postalcode;
+    private LinearLayout mapLinear;
+    private LinearLayout endlinear;
+    private String selectedday;
+    private String start_time;
+    private int bicycle_id;
+    ImageButton tobasket;
 
 
 
@@ -83,14 +102,19 @@ public class ReservationFragment extends Fragment {
                 switch (position){
                     case 0:
                         bicycleimage.setImageResource(R.drawable.small);
+                        bicycle_id=1;
                         break;
+
 
                     case 1:
                         bicycleimage.setImageResource(R.drawable.mediumbike);
+                        bicycle_id=2;
                         break;
+
 
                     case 2:
                         bicycleimage.setImageResource(R.drawable.largebike);
+                        bicycle_id=3;
 
                     default:
                 }
@@ -105,9 +129,9 @@ public class ReservationFragment extends Fragment {
         scroll1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                scrollToContent(v);
                 RequestTask requestTask = new RequestTask(url, "GET");
                 requestTask.execute();
+                scrollToContent(v);
             }
         });
         scroll1back.setOnClickListener(new View.OnClickListener() {
@@ -130,17 +154,17 @@ public class ReservationFragment extends Fragment {
 
         timeSlotsByDay = new HashMap<>();
         timeSlotsByDay.put(Calendar.SUNDAY,new ArrayList<>(Arrays.asList("Closed")));
-        timeSlotsByDay.put(Calendar.MONDAY, new ArrayList<>(Arrays.asList("8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30",
+        timeSlotsByDay.put(Calendar.MONDAY, new ArrayList<>(Arrays.asList("08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30",
                 "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30","19:00","20:00","20:30","21:00","21:30")));
-        timeSlotsByDay.put(Calendar.TUESDAY, new ArrayList<>(Arrays.asList("8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30",
+        timeSlotsByDay.put(Calendar.TUESDAY, new ArrayList<>(Arrays.asList("08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30",
                 "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00")));
         timeSlotsByDay.put(Calendar.WEDNESDAY,new ArrayList<>(Arrays.asList("10:00", "10:30", "11:00", "11:30", "12:00", "12:30",
                 "13:00", "13:30", "14:00")));
-        timeSlotsByDay.put(Calendar.THURSDAY,new ArrayList<>(Arrays.asList("8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30",
+        timeSlotsByDay.put(Calendar.THURSDAY,new ArrayList<>(Arrays.asList("08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30",
                 "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00")));
-        timeSlotsByDay.put(Calendar.FRIDAY,new ArrayList<>(Arrays.asList("8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30",
+        timeSlotsByDay.put(Calendar.FRIDAY,new ArrayList<>(Arrays.asList("08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30",
                 "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00")));
-        timeSlotsByDay.put(Calendar.SATURDAY,new ArrayList<>(Arrays.asList("8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30",
+        timeSlotsByDay.put(Calendar.SATURDAY,new ArrayList<>(Arrays.asList("08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30",
                 "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30","19:00","20:00","20:30","21:00","21:30")));
 
 
@@ -153,6 +177,8 @@ public class ReservationFragment extends Fragment {
                 ArrayAdapter<String> timeSlotAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item,selectedTimeSlots);
                 timeSlotAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 timeSlotSpinner.setAdapter(timeSlotAdapter);
+                selectedday = year+"-"+(month+1)+"-"+dayOfMonth;
+                selectedday = String.format("%04d-%02d-%02d",year,month+1,dayOfMonth);
                 Calendar selectedDate = Calendar.getInstance();
                 selectedDate.set(year, month, dayOfMonth);
                 if(selectedDate.get(Calendar.DAY_OF_WEEK)==Calendar.SUNDAY){
@@ -161,6 +187,65 @@ public class ReservationFragment extends Fragment {
             }
         });
 
+
+
+
+
+
+
+        scroll3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if  (reservationTimeSpinner.getSelectedItem()==null) {
+                    Toast.makeText(getContext(),"Kérlek válaszd ki hogy hány órát szeretnéd használni a biciklit.",Toast.LENGTH_SHORT).show();
+
+                }else if
+                (timeSlotSpinner.getSelectedItem() == null) {
+                    Toast.makeText(getContext(), "Kérlek válassz ki egy időpontot!", Toast.LENGTH_SHORT).show();
+                } else {
+                    start_time = selectedday + "T" + timeSlotSpinner.getSelectedItem().toString() + ":00.000Z";
+                    Toast.makeText(getContext(), "" + start_time, Toast.LENGTH_SHORT).show();
+                    Log.d("valami1", ""+start_time);
+                    scrollToContent3(v);
+                }
+            }
+        });
+
+
+
+        reservationbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String reservation_time = reservationTimeSpinner.getSelectedItem().toString();
+                String street= actualstreet.getText().toString();
+                String citystring = city.getText().toString();
+                String postcode = postalcode.getText().toString();
+
+
+
+
+
+                if(citystring.isEmpty()){
+                    Toast.makeText(getContext(),"Várost megadni kötelező!",Toast.LENGTH_SHORT).show();
+                } else if (postcode.isEmpty()) {
+                    Toast.makeText(getContext(),"Iránmyítószámot megadni kötelező!",Toast.LENGTH_SHORT).show();
+
+                } else if (street.isEmpty()) {
+                    Toast.makeText(getContext(),"Utcát,házszámot megadni kötelező!", Toast.LENGTH_SHORT).show();
+                } else {
+
+                    Basket basket = menuList.get(0);
+                    int basket_id=basket.getId();
+                    String location = citystring+", "+postcode+", "+street;
+                    Reservation reservation = new Reservation(0,start_time,location,reservation_time,0,bicycle_id,basket_id);
+                    Gson gson = new Gson();
+                    RequestTask requestTask = new RequestTask(reservationurl,"POST", gson.toJson(reservation));
+                    requestTask.execute();
+                    scrollToContent4(v);
+                }
+
+            }
+        });
 
 
 
@@ -186,6 +271,14 @@ public class ReservationFragment extends Fragment {
         scrollView.smoothScrollTo(0, scrollToY);
     }
 
+    public void scrollToContent3(View view) {
+        int scrollToY = mapLinear.getTop(); // A megfelelő hely Y koordinátája
+        scrollView.smoothScrollTo(0, scrollToY);
+    }
+    public void scrollToContent4(View view) {
+        int scrollToY = endlinear.getTop(); // A megfelelő hely Y koordinátája
+        scrollView.smoothScrollTo(0, scrollToY);
+    }
 
     public void init(View view){
 
@@ -199,10 +292,17 @@ public class ReservationFragment extends Fragment {
         scroll1back = view.findViewById(R.id.scroll1back);
         reservationText = view.findViewById(R.id.reservationText);
         scroll2 = view.findViewById(R.id.scroll2);
+        scroll3 = view.findViewById(R.id.scroll3);
         calendarView = view.findViewById(R.id.calendar);
         calendarLinear = view.findViewById(R.id.calendarLinear);
+        mapLinear = view.findViewById(R.id.maplinear);
         timeSlotSpinner = view.findViewById(R.id.timeSlotSpinner);
         reservationTimeSpinner = view.findViewById(R.id.reservationTimeSpinner);
+        reservationbutton= view.findViewById(R.id.reservationbutton);
+        actualstreet = view.findViewById(R.id.actaulstreet);
+        city = view.findViewById(R.id.city);
+        postalcode = view.findViewById(R.id.postalcode);
+        endlinear = view.findViewById(R.id.endpage);
     }
     private class BasketAdapter extends ArrayAdapter<MenuBeer> {
         public BasketAdapter(Context context, List<MenuBeer> menuBeers) {
@@ -223,12 +323,14 @@ public class ReservationFragment extends Fragment {
             TextView textViewName = view.findViewById(R.id.menuName);
             TextView textViewType = view.findViewById(R.id.menuType);
             TextView textViewPrice = view.findViewById(R.id.menuPrice);
+            ImageButton tobasket = view.findViewById(R.id.tobasketbutton);
             ImageView imageViewMenu = view.findViewById(R.id.imagetomenu);
             //actualComment létrehozása a commentsList listából
             MenuBeer actualbasket = getItem(position);
             textViewName.setText(actualbasket.getMenuName());
             textViewType.setText(actualbasket.getMenuType());
             textViewPrice.setText(String.valueOf(actualbasket.getMenuPrice()));
+            tobasket.setVisibility(View.GONE);
 
             String menuName = actualbasket.getMenuName();
             int imageResourceId = getResources().getIdentifier(menuName.toLowerCase().replace(" ","_").replace("(","").replace(")",""), "drawable", getActivity().getPackageName());
